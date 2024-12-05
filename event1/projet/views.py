@@ -36,5 +36,3 @@ def creer_evenement(request):
             return redirect('liste_evenements')  # Redirige vers une liste d'événements (ou une autre page)
 
     return render(request, 'creer_evenement.html', {'erreur': erreur})
-
-vbfbgfb
