@@ -42,8 +42,11 @@ def liste_evenements(request):
 def update_evenement(request, evenement_id):
     evenement = get_object_or_404(Evenement, id=evenement_id)
     erreur = None
-    organisateurs = Organisateur.objects.all()
-
+    
+    user = request.user
+        
+        # Si l'utilisateur connecté n'a pas d'organisateur associé, l'attribuer
+    organisateur, created = Organisateur.objects.get_or_create(user=user)
     if request.method == 'POST':
         titre = request.POST.get('titre')
         description = request.POST.get('description')
@@ -57,7 +60,7 @@ def update_evenement(request, evenement_id):
         if not titre or not date_evenement or not lieu or not organisateur:
             erreur = "Tous les champs obligatoires (*) doivent être remplis."
         else:
-            organisateur = Organisateur.objects.get(id=organisateur)
+            
             evenement.titre = titre
             evenement.description = description
             evenement.date_evenement = date_evenement
@@ -70,4 +73,17 @@ def update_evenement(request, evenement_id):
             evenement.save()
             return redirect('liste_evenements')
 
-    return render(request, 'update_evenement.html', {'evenement': evenement, 'organisateurs': organisateurs, 'erreur': erreur})
+    return render(request, 'update_evenement.html', {'evenement': evenement,'erreur': erreur})
+
+def delete_evenement(request, evenement_id):
+    evenement = get_object_or_404(Evenement, id=evenement_id)
+
+    # Vérifier si l'utilisateur connecté est l'organisateur de l'événement
+    if evenement.organisateur.user != request.user:
+        return redirect('liste_evenements')  # Rediriger si ce n'est pas l'organisateur
+
+    if request.method == 'POST':
+        evenement.delete()
+        return redirect('liste_evenements')
+
+    return render(request, 'delete_evenement.html', {'evenement': evenement})
