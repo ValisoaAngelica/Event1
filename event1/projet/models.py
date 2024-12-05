@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 class Evenement(models.Model):
     id_evenement = models.AutoField(db_column='ID_EVENEMENT', primary_key=True)  # Field name made lowercase.
     id_organisateur = models.IntegerField(db_column='ID_ORGANISATEUR')  # Field name made lowercase.
@@ -7,6 +7,7 @@ class Evenement(models.Model):
     description = models.TextField(db_column='DESCRIPTION', blank=True, null=True)  # Field name made lowercase.
     lieu = models.TextField(db_column='LIEU', blank=True, null=True)  # Field name made lowercase.
     date_evenement = models.DateField(db_column='DATE_EVENEMENT', blank=True, null=True)  # Field name made lowercase.
+    date_creation = models.DateField(default=timezone.now)
     capacite = models.IntegerField(db_column='CAPACITE', blank=True, null=True)  # Field name made lowercase.
     programme = models.TextField(db_column='PROGRAMME', blank=True, null=True)  # Field name made lowercase.
     image = models.TextField(db_column='IMAGE', blank=True, null=True)  # Field name made lowercase.
@@ -47,4 +48,3 @@ class Participant(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'participant'
