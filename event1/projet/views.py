@@ -37,3 +37,4 @@ def creer_evenement(request):
 
     return render(request, 'creer_evenement.html', {'erreur': erreur})
 
+vbfbgfb
