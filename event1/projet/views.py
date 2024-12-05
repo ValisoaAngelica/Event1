@@ -18,7 +18,8 @@ def creer_evenement(request):
         capacite = request.POST.get('capacite')
         programme = request.POST.get('programe')
         organisateur = request.POST.get('organisateur')
-        if not titre or not date or not lieu or not organisateur:
+        image = request.FILES.get('image')
+        if not titre or not date_evenement or not lieu or not organisateur:
             erreur = "Tous les champs obligatoires (*) doivent être remplis."
         else:
             evenement = Evenement(
@@ -29,6 +30,7 @@ def creer_evenement(request):
                 capacite = capacite,
                 programme = programme,
                 organisateur=organisateur,
+                image = image,
             )
             evenement.save()
             return redirect('liste_evenements')  # Redirige vers une liste d'événements (ou une autre page)
