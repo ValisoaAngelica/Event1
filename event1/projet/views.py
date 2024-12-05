@@ -1,11 +1,7 @@
 from django.shortcuts import render
-
-# Create your views here.
-
-# views.py
 from django.shortcuts import render, redirect
 from .models import Evenement
-from django.utils.dateparse import parse_date, parse_time
+from django.utils.dateparse import parse_date
 
 def creer_evenement(request):
     erreur = None
@@ -37,3 +33,6 @@ def creer_evenement(request):
 
     return render(request, 'creer_evenement.html', {'erreur': erreur})
 
+def liste_evenements(request):
+    evenements = Evenement.objects.all()
+    return render(request, 'liste_evenements.html', {'evenements': evenements})
