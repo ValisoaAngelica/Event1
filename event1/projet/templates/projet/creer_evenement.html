@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -9,9 +10,47 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aguafina+Script&amp;display=swap">
     <link rel="stylesheet" href="../../static/assets/fonts/fontawesome-all.min.css">
+    <script src="{% static 'bootstrap-5.0.2-dist/js/bootstrap.bundle.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.min.css' %}">
 </head>
 
 <body id="page-top">
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-7 py-4">
+                <h4 class="text-white">A propos</h4>
+                <p class="text-muted">Event est une plateforme destinée à faciliter et à promouvoir vos évènements. Mais aussi vous pouvez reserver gratuitement les évènements de votre choix</p>
+              </div>
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4 class="text-white">A savoir</h4>
+                <ul class="list-unstyled">
+                  <li><a href="creer_evenement.html" class="text-white">Creer votre évènenement</a></li>
+                  <li><a href="connexion.html" class="text-white">Se deconnecter</a></li>
+                  {% if user_email %}
+                    <p class="text-white">{{user_email}}</p>
+                  {% else %}
+                    <p class="text-white">erreur</p>  
+                  {% endif %}  
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+          <div class="container">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              <strong>Event</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+    </header>
     <div class="container mt-5">
     <h2 class="mb-4">Créer un nouvel événement</h2>
 
@@ -60,7 +99,7 @@
 
         <div class="mb-3">
             <label for="image" class="form-label">URL de l'image:</label>
-            <input type="url" class="form-control" id="image" name="image">
+            <input type="text" class="form-control" id="image" name="image">
         </div>
 
         <button type="submit" class="btn btn-primary">Créer l'événement</button>
