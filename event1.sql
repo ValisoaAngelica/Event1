@@ -20,6 +20,10 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `event`
 --
+DROP DATABASE IF EXISTS event;
+
+CREATE DATABASE IF NOT EXISTS event;
+USE event;
 
 -- --------------------------------------------------------
 

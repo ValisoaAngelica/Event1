@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
-from .models import Evenement, Organisateur
+from .models import *
 from django.utils.dateparse import parse_date
 
 def creer_evenement(request):
@@ -8,7 +8,7 @@ def creer_evenement(request):
     user = request.user
         
         # Si l'utilisateur connecté n'a pas d'organisateur associé, l'attribuer
-    organisateur, created = Organisateur.objects.get_or_create(user=user)
+    organisateur, created = Utilisateur.objects.get_or_create(user=user)
     if request.method == 'POST':
         titre = request.POST.get('titre')
         description = request.POST.get('description')
