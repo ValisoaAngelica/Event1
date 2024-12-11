@@ -105,7 +105,7 @@ def inscription(request):
             role=role   
         )
         user.save()
-        return redirect('')
+        return redirect('/')
     return render(request, 'projet/inscription.html')
 
 def connexion(request):
