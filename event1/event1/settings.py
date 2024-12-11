@@ -55,7 +55,7 @@ ROOT_URLCONF = 'event1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['Event1/event1/projet/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,7 +121,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT ='Event1/event1/projet/static'
 
 MEDIA_URL = '/media/'  # URL publique pour accéder aux fichiers média
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Chemin pour stocker les fichiers média

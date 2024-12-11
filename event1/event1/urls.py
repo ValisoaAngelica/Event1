@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+    path("", include("projet.urls"))
 ]
 
 if settings.DEBUG:  # En mode développement uniquement

@@ -22,7 +22,7 @@ class Evenement(models.Model):
     date_creation = models.DateField(db_column= "DATE_CREATION",default=timezone.now)
     capacite = models.IntegerField(db_column='CAPACITE', blank=True, null=True)  # Field name made lowercase.
     programme = models.TextField(db_column='PROGRAMME', blank=True, null=True)  # Field name made lowercase.
-    image = models.ImageField(db_column='IMAGE',upload_to='img/', blank=True, null=True)  # Field name made lowercase.
+    # image = models.ImageField(db_column='IMAGE',upload_to='img/', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False

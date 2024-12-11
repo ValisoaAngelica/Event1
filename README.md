@@ -1,1 +1,4 @@
 # Event1
+- Salut, nataoko fotsiny aloha ny front sy ny mifandray amin'ny ao amin'ny views.py(izany hoe ny fonction) dia aveo nareo juste mameno izay atao amin'ny back, ohatran'izay ihany koa ny ao amin'ny urls.py
+- Ilay manao afficher_evenemet tsy hitako hoe atao ahoana satria raha tsy misy evenement efa creer tsy afaka manao affichage mihitsy, dia ohatran'izay koa ilay hoe reserver, raha vao tsisy evenemt dia tsy hitako hoe inona ny interface 
+atao, fa ao amin'ilay index.html mantsy misy sous forme liste d'evenement ihany dia afaka jerenareo eo misy boutton hoe reserver izay eo dia amin'ny alalan'iny no mipoitra ilay reservation dia izay no olako hoe mbola tsisy evenement mihitsy dia tsy aiko hoe ahoana, raha hoe tsy dia be atao instony Valisoa dia afaka ataonao ihany ilay reserver.html sinon teneno ihany za raha tsy mety dia ataoko ihany rehefa misy evenement.
