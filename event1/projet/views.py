@@ -110,3 +110,7 @@ def inscription(request):
 
 def connexion(request):
     return render(request, 'projet/connexion.html')
+
+def event_list(request):
+    event = Evenement.objects.all()
+    return render(request, 'projet/event_list.html', {'evenements': event})

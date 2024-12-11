@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Profile - Brand</title>
+    <link rel="stylesheet" href="../../static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aguafina+Script&amp;display=swap">
+    <link rel="stylesheet" href="../../static/assets/fonts/fontawesome-all.min.css">
+</head>
+
+<body id="page-top">
+    <div class="container mt-5">
+        <h2 class="mb-4">Liste des événements</h2>
+    
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Titre</th>
+                    <th>Date</th>
+                    <th>Lieu</th>
+                    <th>Capacité</th>
+                    <th>Programme</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in evenements %}
+                <tr>
+                    <td>{{ e.TITRE }}</td>
+                    <td>{{ e.TITRE }}</td>
+                    <td>{{ e.DATE_EVENEMENT }}</td>
+                    <td>{{ e.LIEU }}</td>
+                    <td>{{ e.CAPACITE }}</td>
+                    <td>{{ e.LIEU }}</td>
+                    <td>{{ e.CAPACITE }}</td>
+                    <td>
+                        <a href="" class="btn btn-sm btn-primary">Modifier</a>
+                        <a href="" class="btn btn-sm btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8">Aucun événement n'a été créé.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <a href="{% url 'creer_evenement' %}" class="btn btn-success">Créer un nouvel événement</a>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
