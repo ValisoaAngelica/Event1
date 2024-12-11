@@ -92,6 +92,20 @@ def index(request):
     return render(request, 'projet/index.html')
 
 def inscription(request):
+    if request.method =='POST':
+        nom= request.POST.get('nom')
+        email = request.POST.get('email')
+        mdp = request.POST.get('mdp')
+        role = request.POST.get('role')
+
+        user = Utilisateur(
+            nom_utilisateur=nom,
+            email_utilisateur= email,
+            mdp_utilisateur=mdp,
+            role=role   
+        )
+        user.save()
+        return redirect('/')
     return render(request, 'projet/inscription.html')
 
 def connexion(request):
