@@ -9,22 +9,26 @@ from django.http import JsonResponse
 from .models import Evenement
 from django.utils.dateparse import parse_datetime
 from django.contrib import messages
+from datetime import datetime
 
 #@login_required
 #@require_http_methods(["GET", "POST"])
 def creer_evenement(request):
+    user_email = request.session.get('user_email',None)
     if request.method == 'POST':
-        if request.user.utilisateur.ROLE != 'organisateur':
+        user=request.session.get('user_email')
+        u=Utilisateur.objects.get(email_utilisateur=user)
+        if u.role != 'organisateur':
             messages.error(request, "Vous n'avez pas les droits pour créer un événement.")
-            return redirect('')  # Redirect to an appropriate page
+            return redirect('/') 
         try:
             event = Evenement(
-                id_organisateur = request.ID_UTILISATEUR,
-                titre=request.POST['titre'],
+                id_organisateur = u.id_utilisateur,
+                titre=request.POST.get('titre'),
                 description=request.POST.get('description'),
                 lieu=request.POST.get('lieu'),
-                date_evenement=parse_datetime(request.POST['date_evement']),
-                capacite=int(request.POST['capacite']),
+                date_evenement=datetime.strptime(request.POST.get('date_evenement'), '%Y-%m-%dT%H:%M'),
+                capacite=int(request.POST.get('capacite')),
                 programme=request.POST.get('programme'),
                 image=request.POST.get('image')
             )
@@ -33,7 +37,7 @@ def creer_evenement(request):
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
     else:
-        return render(request, 'projet/creer_evenement.html')
+        return render(request, 'projet/creer_evenement.html',{'user_email':user_email})
 
 # def liste_evenements(request):
 #     evenements = Evenement.objects.all()
@@ -90,7 +94,8 @@ def creer_evenement(request):
 
 def index(request):
     user_email = request.session.get('user_email',None)
-    return render(request, 'projet/index.html',{'user_email': user_email})
+    event= Evenement.objects.all()
+    return render(request, 'projet/index.html',{'user_email': user_email,'event':event})
 
 def inscription(request):
     if request.method =='POST':
