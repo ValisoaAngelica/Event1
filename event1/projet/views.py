@@ -92,7 +92,6 @@ def index(request):
     return render(request, 'projet/index.html')
 
 def inscription(request):
-<<<<<<< HEAD
     if request.method =='POST':
         nom= request.POST.get('nom')
         email = request.POST.get('email')
@@ -107,8 +106,6 @@ def inscription(request):
         )
         user.save()
         return redirect('/')
-=======
->>>>>>> origin/main
     return render(request, 'projet/inscription.html')
 
 def connexion(request):
