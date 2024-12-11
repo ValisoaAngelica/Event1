@@ -112,5 +112,5 @@ def connexion(request):
     return render(request, 'projet/connexion.html')
 
 def event_list(request):
-    event = Evenement.objects.all().order_by('date_evenement')
+    event = Evenement.objects.all()
     return render(request, 'projet/event_list.html', {'evenements': event})

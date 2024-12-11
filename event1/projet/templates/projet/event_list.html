@@ -28,10 +28,13 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Image</th>
                     <th>Titre</th>
                     <th>Date</th>
                     <th>Lieu</th>
                     <th>Capacité</th>
+                    <th>Programme</th>
+                    <th>Description</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -39,7 +42,10 @@
                 {% for e in evenements %}
                 <tr>
                     <td>{{ e.TITRE }}</td>
+                    <td>{{ e.TITRE }}</td>
                     <td>{{ e.DATE_EVENEMENT }}</td>
+                    <td>{{ e.LIEU }}</td>
+                    <td>{{ e.CAPACITE }}</td>
                     <td>{{ e.LIEU }}</td>
                     <td>{{ e.CAPACITE }}</td>
                     <td>
@@ -49,13 +55,13 @@
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="5">Aucun événement n'a été créé.</td>
+                    <td colspan="8">Aucun événement n'a été créé.</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     
-        <a href="{% url 'create_event' %}" class="btn btn-success">Créer un nouvel événement</a>
+        <a href="{% url 'creer_evenement' %}" class="btn btn-success">Créer un nouvel événement</a>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/theme.js"></script>
