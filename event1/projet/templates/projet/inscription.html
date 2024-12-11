@@ -27,13 +27,20 @@
                                     <div class="text-center">
                                         <h4 class="text-dark mb-4">Inscription&nbsp;</h4>
                                     </div>
-                                    <form class="user">
-                                        <div class="mb-3"><input class="form-control form-control-user" type="name" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Nom d'utilisateur" name="name"></div>
+                                    <form class="user" method="post">
+                                        {% csrf_token %}
+                                        <div class="mb-3"><input class="form-control form-control-user" type="name" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Nom d'utilisateur" name="nom"></div>
                                         <div class="mb-3"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Votre adresse Email" name="email"></div>
-                                        <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Mot de passe" name="Mdp"></div>
+                                        <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Mot de passe" name="mdp"></div>
                                         <div class="mb-3">
                                             <div class="custom-control custom-checkbox small"></div>
-                                        </div><button class="btn btn-primary d-block btn-user w-100" type="submit">S'inscrire</button>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="roleSwitch">
+                                            <label class="form-check-label" for="roleSwitch" id="roleLabel">Participant</label>
+                                        </div>
+                                        <input type="hidden" name="role" id="hiddenRole" value="Participant">
+                                        <button class="btn btn-primary d-block btn-user w-100" type="submit">S'inscrire</button>
                                         <hr>
                                         
                                     </form>
@@ -49,6 +56,22 @@
     </div>
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/theme.js' %}"></script>
+    <script>
+        const switchInput = document.getElementById('roleSwitch');
+        const switchLabel = document.getElementById('roleLabel');
+        const hidden = document.getElementById('hiddenRole');
+
+        switchInput.addEventListener('change', () => {
+        if (switchInput.checked) {
+            switchLabel.textContent = 'Organisateur';
+            hidden.value = 'Organisateur';
+        } else {
+            switchLabel.textContent = 'Participant';
+            hidden.value = 'Participant';
+        }
+        });
+
+    </script>
 </body>
 
 </html>
