@@ -89,7 +89,8 @@ def creer_evenement(request):
 #     return render(request, 'delete_evenement.html', {'evenement': evenement})
 
 def index(request):
-    return render(request, 'projet/index.html')
+    user_email = request.session.get('user_email',None)
+    return render(request, 'projet/index.html',{'user_email': user_email})
 
 def inscription(request):
     if request.method =='POST':
@@ -109,6 +110,20 @@ def inscription(request):
     return render(request, 'projet/inscription.html')
 
 def connexion(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        mdp = request.POST.get('mdp')
+
+        try:
+            user = Utilisateur.objects.get(email_utilisateur=email,mdp_utilisateur=mdp)
+            if user:
+                request.session['user_email'] = user.email_utilisateur
+                return redirect('/')  
+            else:
+                return render(request, 'projet/connexion.html', {'error': 'Mot de passe incorrect'})
+        except Utilisateur.DoesNotExist:
+            return render(request, 'projet/connexion.html', {'error': 'Email ou mot de passe incorrect'})
+    
     return render(request, 'projet/connexion.html')
 
 def event_list(request):
