@@ -10,34 +10,52 @@ from .models import Evenement,Utilisateur
 from django.utils.dateparse import parse_datetime
 from django.contrib import messages
 from datetime import datetime
+import os
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 #@login_required
 #@require_http_methods(["GET", "POST"])
 def creer_evenement(request):
-    user_email = request.session.get('user_email',None)
+    user_email = request.session.get('user_email', None)
     if request.method == 'POST':
-        user=request.session.get('user_email')
-        u=Utilisateur.objects.get(email_utilisateur=user)
-        if u.role != 'organisateur':
-            messages.error(request, "Vous n'avez pas les droits pour créer un événement.")
-            return redirect('/') 
+        user = request.session.get('user_email')
+        u = Utilisateur.objects.get(email_utilisateur=user)
+        image = request.FILES.get('image')
+
         try:
+            # Sauvegarde de l'image
+            if image:
+                fs = FileSystemStorage(location=os.path.join(settings.BASE_DIR, 'static/media/img'))
+                filename = fs.save(image.name, image)
+                image_nom = filename
+            else:
+                image_nom = None
+
+            # Vérification du rôle
+            if u.role != 'organisateur':
+                messages.error(request, "Vous n'avez pas les droits pour créer un événement.")
+                return redirect('/')
+
+            # Création de l'événement
             event = Evenement(
-                id_organisateur = u.id_utilisateur,
+                id_organisateur=u.id_utilisateur,
                 titre=request.POST.get('titre'),
                 description=request.POST.get('description'),
                 lieu=request.POST.get('lieu'),
                 date_evenement=datetime.strptime(request.POST.get('date_evenement'), '%Y-%m-%dT%H:%M'),
                 capacite=int(request.POST.get('capacite')),
                 programme=request.POST.get('programme'),
-                image=request.POST.get('image')
+                image=image_nom,
             )
             event.save()
-            return JsonResponse({'status': 'success', 'message': 'Evenement créer avec succès'})
+
+            return redirect('/')
         except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)})
+            return JsonResponse({'status': 'error', 'message': f"Erreur : {str(e)}"})
     else:
-        return render(request, 'projet/creer_evenement.html',{'user_email':user_email})
+        return render(request, 'projet/creer_evenement.html', {'user_email': user_email})
+
 
 # def liste_evenements(request):
 #     evenements = Evenement.objects.all()

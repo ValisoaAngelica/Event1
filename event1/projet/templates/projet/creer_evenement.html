@@ -64,7 +64,7 @@
     </div>
     {% endif %}
 
-    <form method="post" action="{% url 'creer_evenement' %}">
+    <form method="post" enctype="multipart/form-data" action="{% url 'creer_evenement' %}">
         {% csrf_token %}
         
         <div class="mb-3">
@@ -99,7 +99,7 @@
 
         <div class="mb-3">
             <label for="image" class="form-label">URL de l'image:</label>
-            <input type="text" class="form-control" id="image" name="image">
+            <input type="file" class="form-control" id="image" name="image">
         </div>
 
         <button type="submit" class="btn btn-primary">Créer l'événement</button>
