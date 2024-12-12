@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from .models import Evenement
+from .models import Evenement,Utilisateur
 from django.utils.dateparse import parse_datetime
 from django.contrib import messages
 from datetime import datetime
